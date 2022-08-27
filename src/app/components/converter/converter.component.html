@@ -1,0 +1,59 @@
+<div class="row" style="margin-top: 6%" *ngIf="rates">
+  <div class="col-md d-flex justify-content-center">
+    <h2 class="header-title">Currency Converter</h2>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-md-8 offset-2">
+    <div class="row">
+      <div class="col-md-4">
+        <input
+          type="number"
+          style="width: 70% !important; margin-left: 30% !important"
+          class="form-control form-control-sm"
+          placeholder="Enter value to convert"
+          [(ngModel)]="amount"
+        />
+      </div>
+      <div class="col-md-4">
+        <Label class="mr-2">From:</Label>
+        <select
+          style="width: 70%"
+          class="custom-select custom-select-sm"
+          (change)="getCurrencyRates()"
+          [(ngModel)]="from"
+        >
+          <option
+            *ngFor="let currency of getAllCurrencyList()"
+            [value]="currency"
+          >
+            {{ currency }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <Label class="mr-2">To:</Label>
+        <select
+          style="width: 70%"
+          class="custom-select custom-select-sm"
+          [(ngModel)]="to"
+        >
+          <option
+            *ngFor="let currency of getAllCurrencyList()"
+            [value]="currency"
+          >
+            {{ currency }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md d-flex justify-content-center">
+        <h5 [style.color]="amount < 0 ? 'red' : ''">
+          {{ amount ? amount.toFixed(2) : 1.0 }} {{ from }} = {{ convert() }}
+          {{ to }}
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
